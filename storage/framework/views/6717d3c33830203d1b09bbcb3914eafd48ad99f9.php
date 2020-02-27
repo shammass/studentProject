@@ -1,6 +1,6 @@
 
-@section('title', 'Login')
-@include('main')
+<?php $__env->startSection('title', 'Login'); ?>
+<?php echo $__env->make('main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <body class="cat__pages__login">
 <!-- START: pages/login -->
 <div class="cat__pages__login cat__pages__login--fullscreen" style="background-color: black;">
@@ -18,26 +18,27 @@
                             <strong>Please Register</strong>
                         </h4>
                         <br />
-                        @if(isset(Auth::user()->email))
+                        <?php if(isset(Auth::user()->email)): ?>
                             <script>window.location="/main/dashboard"</script>
-                        @endif
-                        @if($message = Session::get('error'))
+                        <?php endif; ?>
+                        <?php if($message = Session::get('error')): ?>
                             <div class="alert alert-danger alert-block">
                                 <button type="button" class="close" data-dismiss="alert">x</button>
-                                <strong>{{ $message }}</strong>
+                                <strong><?php echo e($message); ?></strong>
                             </div>
-                        @endif
-                        @if (count($errors)>0)
+                        <?php endif; ?>
+                        <?php if(count($errors)>0): ?>
                             <div class="alert alert-danger">
                                 <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><?php echo e($error); ?></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </div>
-                        @endif
-                        <form id="form-validation" name="form-validation" method="POST" action="{{ route('register') }}" enctype = "multipart/form-data">
-                        {{ csrf_field() }}
+                        <?php endif; ?>
+                        <form id="form-validation" name="form-validation" method="POST" action="<?php echo e(route('register')); ?>" enctype = "multipart/form-data">
+                        <?php echo e(csrf_field()); ?>
+
                             <div class="form-group">
                                 <label class="form-label">Name</label>
                                 <input id="name"
@@ -57,18 +58,20 @@
                                        data-validation="[NOTEMPTY]">
                             </div>
                             <div class="form-group">
-                                  @foreach($fetchAllServices as $key => $service)
+                                  <?php $__currentLoopData = $fetchAllServices; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <input type="checkbox"
                                      name="services[]"
                                      class="service_checkbox"
-                                     value="{{ $service->service_name}}"
-                                     onclick='myFunction("{{$service->service_name}}");'>
-                                     {{ $service->service_name}}
-                                  @endforeach
+                                     value="<?php echo e($service->service_name); ?>"
+                                     onclick='myFunction("<?php echo e($service->service_name); ?>");'>
+                                     <?php echo e($service->service_name); ?>
+
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <div class="form-group" id="license">
                                <label class="form-control-label">Upload Your License</label><br><br>
-                        {!! Form::file('license_image', array('class' => 'image', 'data-validation-message'=>'License must not be empty!')) !!}
+                        <?php echo Form::file('license_image', array('class' => 'image', 'data-validation-message'=>'License must not be empty!')); ?>
+
                             </div>
                             <div class="form-group" id="description">
                                 <label class="form-label">Description</label>
@@ -111,7 +114,8 @@
                             </div>
                             <div class="form-group">
                                <label id="profile" class="form-control-label">Upload Your Profile Picture</label><br><br>
-                        {!! Form::file('profile_image', array('class' => 'image', 'data-validation-message'=>'Profile Image must not be empty!')) !!}
+                        <?php echo Form::file('profile_image', array('class' => 'image', 'data-validation-message'=>'Profile Image must not be empty!')); ?>
+
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Password</label>

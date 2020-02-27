@@ -1,14 +1,14 @@
-@section('title', 'Services')
-@include('main')
-@include('components/mainmenu')
-@include('components/breadcrumb')
+<?php $__env->startSection('title', 'Services'); ?>
+<?php echo $__env->make('main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('components/mainmenu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('components/breadcrumb', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <div class="cat__content">
 
 <!-- START: -->
 <section class="card">
     <div class="card-header">
          <div class="dropdown pull-right">
-           <a href="{{route('createService')}}" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp; &nbsp; Add Service &nbsp; &nbsp;</a>
+           <a href="<?php echo e(route('createService')); ?>" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp; &nbsp; Add Service &nbsp; &nbsp;</a>
        </div>
         <span class="cat__core__title">
             <strong>Services List</strong>
@@ -17,22 +17,23 @@
 
 
 	<div class="card-body">
-		 @if ($message = Session::get('error'))
+		 <?php if($message = Session::get('error')): ?>
 			<div class="alert alert-danger" role="alert" id="id">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <strong>Oh snap! </strong> {{ $message }}
+                <strong>Oh snap! </strong> <?php echo e($message); ?>
+
             </div>
-		@endif
-		 @if ($message = Session::get('success'))
+		<?php endif; ?>
+		 <?php if($message = Session::get('success')): ?>
 			<div class="alert alert-success" role="alert" id="id">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <strong>Well done! </strong> {{ $message }} !
+                <strong>Well done! </strong> <?php echo e($message); ?> !
             </div>
-		@endif
+		<?php endif; ?>
         <table class="table table-hover nowrap" id="example1" width="100%">
             <thead class="thead-default">
             <tr>
@@ -50,18 +51,21 @@
             </tfoot>
             <tbody>
                 <?php $i = 1;?>
-			@foreach($fetchAllServices as $services)
+			<?php $__currentLoopData = $fetchAllServices; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $services): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
-                <td>{{$i++}}</td>
-                <td>{{ $services->service_name }}</td>
+                <td><?php echo e($i++); ?></td>
+                <td><?php echo e($services->service_name); ?></td>
                 <td style="width:250px;">
-                    <a href="{{route('editService', $services->service_id)}}" class="btn btn-primary" style="margin-left:40px;"> Edit</a>
-                     {!! Form::open(['method' => 'DELETE','route' => ['deleteService', $services->service_id],'style'=>'display:inline','role'=>'form','onsubmit' => 'return confirm("Do you want to delete this ?")']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                    <a href="<?php echo e(route('editService', $services->service_id)); ?>" class="btn btn-primary" style="margin-left:40px;"> Edit</a>
+                     <?php echo Form::open(['method' => 'DELETE','route' => ['deleteService', $services->service_id],'style'=>'display:inline','role'=>'form','onsubmit' => 'return confirm("Do you want to delete this ?")']); ?>
+
+                    <?php echo Form::submit('Delete', ['class' => 'btn btn-danger']); ?>
+
+                    <?php echo Form::close(); ?>
+
                 </td>
             </tr>
-			@endforeach
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>

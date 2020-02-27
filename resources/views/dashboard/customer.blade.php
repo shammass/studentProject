@@ -32,7 +32,60 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
             </div>
         </div>
     </div>
-    <div class="col-xl-8">
+    <div class="row">
+    <div class="col-lg-4">
+        <a href="{{route('viewServicesForCustomer')}}">
+            <div class="cat__core__widget">
+            <div class="cat__core__step cat__core__step--success">
+                <span class="cat__core__step__digit">
+                    <i class="icmn-cogs"></i>
+                </span>
+                <div class="cat__core__step__desc">
+                    <span class="cat__core__step__title">Services</span>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+   <!--  <div class="col-lg-3">
+        <div class="cat__core__widget">
+            <div class="cat__core__step cat__core__step--primary">
+                <span class="cat__core__step__digit">
+                    <i class="icmn-users"></i>
+                </span>
+                <div class="cat__core__step__desc">
+                    <span class="cat__core__step__title">Users</span>
+                    <p>Total Users: 7658</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-lg-4">
+        <div class="cat__core__widget">
+            <div class="cat__core__step cat__core__step--danger">
+                <span class="cat__core__step__digit">
+                    <i class="icmn-bullhorn"></i>
+                </span>
+                <div class="cat__core__step__desc">
+                    <span class="cat__core__step__title">Notifications</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="cat__core__widget">
+            <div class="cat__core__step cat__core__step--default">
+                <span class="cat__core__step__digit">
+                    <i class="icmn-price-tags"></i>
+                </span>
+                <div class="cat__core__step__desc">
+                    <span class="cat__core__step__title">Feedback</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- <div class="col-xl-8">
         <div class="row">
             <div class="col-lg-6">
                 <div class="cat__core__widget p-3">
@@ -101,63 +154,10 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
 
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
-<!-- <div class="row">
-    <div class="col-lg-3">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--success">
-                <span class="cat__core__step__digit">
-                    <i class="icmn-database"></i>
-                </span>
-                <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Databases</span>
-                    <p>Total Products: 61756</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--primary">
-                <span class="cat__core__step__digit">
-                    <i class="icmn-users"></i>
-                </span>
-                <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Users</span>
-                    <p>Total Users: 7658</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--danger">
-                <span class="cat__core__step__digit">
-                    <i class="icmn-bullhorn"></i>
-                </span>
-                <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Connections</span>
-                    <p>Total Visitors: 5543</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--default">
-                <span class="cat__core__step__digit">
-                    <i class="icmn-price-tags"></i>
-                </span>
-                <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Sales</span>
-                    <p>Total Orders: 646</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
+
 
 <!-- END: page scripts -->
 <!-- START: page scripts -->

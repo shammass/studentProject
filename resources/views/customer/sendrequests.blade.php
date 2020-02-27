@@ -1,4 +1,4 @@
-@section('title', 'Services')
+@section('title', 'Send Request')
 @include('main')
 @include('components/mainmenu')
 @include('components/breadcrumb')
@@ -8,7 +8,7 @@
 <section class="card">
     <div class="card-header">
          <div class="dropdown pull-right">
-           <a href="{{route('createService')}}" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp; &nbsp; Add Service &nbsp; &nbsp;</a>
+           <a href="{{route('createServiceRequest')}}" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp; &nbsp; Request Service &nbsp; &nbsp;</a>
        </div>
         <span class="cat__core__title">
             <strong>Services List</strong>
@@ -37,31 +37,34 @@
             <thead class="thead-default">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Action</th>
+                <th>Service Requested</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Action</th>
+                <th>status</th>
             </tr>
             </tfoot>
             <tbody>
                 <?php $i = 1;?>
-			@foreach($fetchAllServices as $services)
-            <tr>
-                <td>{{$i++}}</td>
-                <td>{{ $services->service_name }}</td>
-                <td style="width:250px;">
-                    <a href="{{route('editService', $services->service_id)}}" class="btn btn-primary" style="margin-left:40px;"> Edit</a>
-                     {!! Form::open(['method' => 'DELETE','route' => ['deleteService', $services->service_id],'style'=>'display:inline','role'=>'form','onsubmit' => 'return confirm("Do you want to delete this ?")']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-			@endforeach
+                @foreach($fetchAllServices as $key=>$value)
+
+                    @php $getServiceName = App\Service::select('service_name')->where(['service_id' => $value->service_id])->first(); @endphp
+                    <tr>
+                        <td>{{$i++}}</td>
+                        <td>{{$getServiceName->service_name}}</td>
+                        <td>
+                            {{$value->accepted_by == 0 ? 'Pending': 'Accepted'}}
+                            @if($value->accepted_by != 0)
+                               <button class="btn btn-primary btn-sm" style="margin-left: 10px;"> <a href="{{route('viewServiceProvider', $value->accepted_by)}}" style="color:white;">View Details</a></button>
+                            @endif
+                        </td>
+
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

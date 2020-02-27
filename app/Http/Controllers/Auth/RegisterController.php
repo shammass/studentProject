@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Service;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Image;
 
 class RegisterController extends Controller {
 	/*
@@ -39,7 +41,8 @@ class RegisterController extends Controller {
 	}
 
 	public function serviceRegister() {
-		return view('auth.service_register');
+		$fetchAllServices = Service::all();
+		return view('auth.service_register', compact('fetchAllServices'));
 	}
 
 	public function customerRegister() {
@@ -53,15 +56,30 @@ class RegisterController extends Controller {
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
 	protected function validator(array $data) {
-		return Validator::make($data, [
-			'name' => ['required', 'string', 'max:255'],
-			'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-			'password' => ['required', 'string', 'min:6', 'confirmed'],
-			'address' => ['required', 'string', 'max:255'],
-			'city' => ['required', 'string', 'max:25'],
-			'pin' => ['required', 'string', 'max:10'],
-			'contact' => ['required', 'string', 'max:10'],
-		]);
+		if ($data['role'] === 4) {
+			return Validator::make($data, [
+				'name' => ['required', 'string', 'max:255'],
+				'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+				'password' => ['required', 'string', 'min:6', 'confirmed'],
+				'address' => ['required', 'string', 'max:255'],
+				'city' => ['required', 'string', 'max:25'],
+				'pin' => ['required', 'string', 'max:10'],
+				'contact' => ['required', 'string', 'max:10'],
+				'services' => ['required', 'string', 'max:150'],
+				'profile_image' => ['required', 'string', 'max:255'],
+				'description' => ['required', 'string', 'max:255'],
+			]);
+		} else {
+			return Validator::make($data, [
+				'name' => ['required', 'string', 'max:255'],
+				'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+				'password' => ['required', 'string', 'min:6', 'confirmed'],
+				'address' => ['required', 'string', 'max:255'],
+				'city' => ['required', 'string', 'max:25'],
+				'pin' => ['required', 'string', 'max:10'],
+				'contact' => ['required', 'string', 'max:10'],
+			]);
+		}
 	}
 
 	/**
@@ -71,15 +89,43 @@ class RegisterController extends Controller {
 	 * @return \App\User
 	 */
 	protected function create(array $data) {
-		return User::create([
-			'username' => $data['name'],
-			'email' => $data['email'],
-			'address' => $data['address'],
-			'city' => $data['city'],
-			'pincode' => $data['pin'],
-			'contact_no' => $data['contact'],
-			'role' => $data['role'],
-			'password' => Hash::make($data['password']),
-		]);
+		if ($data['role'] == 4) {
+			if ($data['license_image']) {
+				$image = $data['license_image'];
+				$license_image = time() . '.' . $image->getClientOriginalExtension();
+				Image::make($image)->resize(128, 128)->save(public_path('/upload/profileimage/' . $license_image));
+			}
+			if ($data['profile_image']) {
+				$image = $data['profile_image'];
+				$profile_image = time() . '.' . $image->getClientOriginalExtension();
+				Image::make($image)->resize(128, 128)->save(public_path('/upload/profileimage/' . $profile_image));
+			}
+			return User::create([
+				'username' => $data['name'],
+				'email' => $data['email'],
+				'address' => $data['address'],
+				'city' => $data['city'],
+				'pincode' => $data['pin'],
+				'contact_no' => $data['contact'],
+				'role' => 4,
+				'password' => Hash::make($data['password']),
+				'license_image' => $license_image,
+				'profile' => $profile_image,
+				'service_type' => implode(',', $data['services']),
+				'description' => $data['description'],
+			]);
+		} else {
+			return User::create([
+				'username' => $data['name'],
+				'email' => $data['email'],
+				'address' => $data['address'],
+				'city' => $data['city'],
+				'pincode' => $data['pin'],
+				'contact_no' => $data['contact'],
+				'role' => 2,
+				'password' => Hash::make($data['password']),
+			]);
+		}
+
 	}
 }

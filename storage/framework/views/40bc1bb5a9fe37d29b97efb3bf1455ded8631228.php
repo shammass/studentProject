@@ -7,14 +7,14 @@
         </div>
     </div>
     <div class="cat__menu-left__logo">
-        <a href="{{url('dashboard') }}">
+        <a href="<?php echo e(url('dashboard')); ?>">
             Service Mate
         </a>
     </div>
     <div class="cat__menu-left__inner">
         <ul class="cat__menu-left__list cat__menu-left__list--root">
             <!--<li class="cat__menu-left__item">
-                <a href="{{ url('users')}}" class="cat__menu-right__action--menu-toggle">
+                <a href="<?php echo e(url('users')); ?>" class="cat__menu-right__action--menu-toggle">
                     <span class="cat__menu-left__icon icmn-users cat__core__spin-delayed--pseudo-selector"></span>
                     Users
                 </a>
@@ -26,7 +26,7 @@
                 </a>
                 <ul class="cat__menu-left__list">
                     <li class="cat__menu-left__item">
-                        <a href="{{ url('pages')}}">
+                        <a href="<?php echo e(url('pages')); ?>">
                             <span class="cat__menu-left__icon icmn-file-text2"></span>
                             Pages
                         </a>

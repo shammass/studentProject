@@ -1,14 +1,14 @@
-@section('title', 'Dashboard')
-@include('main')
-@include('components/mainmenu')
-@include('components/breadcrumb')
- <meta name="csrf-token" content="{{ csrf_token() }}">
+<?php $__env->startSection('title', 'Dashboard'); ?>
+<?php echo $__env->make('main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('components/mainmenu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('components/breadcrumb', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+ <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 <div class="cat__content">
 
 <div class="row">
     <div class="col-xl-4"  style="background-color:#fff; margin-bottom:21px;">
         <div class="cat__core__widget cat__core__widget__2">
-            <div class="cat__core__widget__2__head" style="background-image: url('{!! asset('/dist/modules/dummy-assets/common/img/photos/10.jpeg') !!}');">
+            <div class="cat__core__widget__2__head" style="background-image: url('<?php echo asset('/dist/modules/dummy-assets/common/img/photos/10.jpeg'); ?>');">
             </div>
             <div class="cat__core__widget__2__content">
                 <div class="cat__core__widget__2__left">
@@ -21,13 +21,13 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                     </a>
                    <?php } else {?>
                          <a class="cat__core__avatar cat__core__avatar--90 cat__core__avatar--border-white" href="javascript:void(0);">
-                            <img src="{!! asset('/upload/profileimage/user_profile.jpg') !!}" alt="Alternative text to the image">
+                            <img src="<?php echo asset('/upload/profileimage/user_profile.jpg'); ?>" alt="Alternative text to the image">
                          </a>
                    <?php }?>
                     <br />
-					<h3>Welcome  {{ Auth::user()->username}} </h3>
-					<h6>{{ Auth::user()->email }}</h6><br>
-                	<!-- <p>{{ Auth::user()->profile_summary }}</p> -->
+					<h3>Welcome  <?php echo e(Auth::user()->username); ?> </h3>
+					<h6><?php echo e(Auth::user()->email); ?></h6><br>
+                	<!-- <p><?php echo e(Auth::user()->profile_summary); ?></p> -->
                 </div>
             </div>
         </div>
@@ -37,10 +37,10 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
             <div class="col-lg-6">
                 <div class="cat__core__widget p-3">
                     <strong>Service Providers:</strong>
-                    <p class="text-muted">Registered Service Providers:  <strong>{{$getServiceProviderCount}}</strong></p>
+                    <p class="text-muted">Registered Service Providers:  <strong><?php echo e($getServiceProviderCount); ?></strong></p>
 
                     <strong>Customers:</strong>
-                    <p class="text-muted">Registered customer:<strong>{{$getCustomerCount}}</strong></p>
+                    <p class="text-muted">Registered customer:<strong><?php echo e($getCustomerCount); ?></strong></p>
 
                 </div>
             </div>
@@ -49,7 +49,7 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                     <div class="carousel slide" id="carousel-1" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <a href="{{route('viewServiceProviders')}}" class="cat__core__widget__3__body text-white">
+                                <a href="<?php echo e(route('viewServiceProviders')); ?>" class="cat__core__widget__3__body text-white">
                                     <div class="cat__core__widget__3__icon">
                                         <i class="icmn-accessibility"></i>
                                     </div>
@@ -84,7 +84,7 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                     <div class="carousel slide" id="carousel-4" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <a href="{{route('viewServices')}}" class="cat__core__widget__3__body text-white">
+                                <a href="<?php echo e(route('viewServices')); ?>" class="cat__core__widget__3__body text-white">
                                     <div class="cat__core__widget__3__icon">
                                         <i class="icmn-cogs"></i>
                                     </div>
@@ -240,4 +240,4 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
     } );
 </script>
 <!-- END: page scripts -->
-@include('components/footer')
+<?php echo $__env->make('components/footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

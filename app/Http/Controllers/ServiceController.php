@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\CustomerRequestedService;
+use App\Service;
+use Auth;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller {
@@ -12,22 +14,8 @@ class ServiceController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$fetchAllServiceProviders = User::where('role', '>', 2)->get();
-		return view('service.index', compact('fetchAllServiceProviders'));
-	}
-
-	public function accept($id) {
-		$acceptServiceProvider = User::findOrFail($id);
-		$acceptServiceProvider->role = 3;
-		$acceptServiceProvider->save();
-		return redirect('view/service_providers')->with('success', 'Accepted Service Provider !');
-	}
-
-	public function reject($id) {
-		$acceptServiceProvider = User::findOrFail($id);
-		$acceptServiceProvider->role = 4;
-		$acceptServiceProvider->save();
-		return redirect('view/service_providers')->with('error', 'Rejected Service Provider !');
+		$fetchAllServices = Service::all();
+		return view('service.index', compact('fetchAllServices'));
 	}
 
 	/**
@@ -36,7 +24,7 @@ class ServiceController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		//
+		return view('service.create');
 	}
 
 	/**
@@ -46,7 +34,33 @@ class ServiceController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-		//
+		$addService = new Service();
+		$addService->service_name = $request->get('service');
+		$addService->save();
+		return redirect('view/services')->with('success', 'Service Added Successfully !');
+	}
+
+	public function viewToCustomer() {
+		$fetchAllServices = CustomerRequestedService::all();
+		return view('customer.sendrequests', compact('fetchAllServices'));
+	}
+
+	public function sendRequest() {
+		$fetchAllServices = Service::all();
+		return view('customer.createRequest', compact('fetchAllServices'));
+	}
+
+	public function storeRequests(Request $request) {
+		$storeService = new CustomerRequestedService();
+		$storeService->service_id = $request->get('services');
+		$storeService->customer_id = Auth::user()->user_id;
+		$storeService->accepted_by = 0;
+		$storeService->description = $request->get('description');
+		$storeService->city = $request->get('city');
+		$storeService->pincode = $request->get('pincode');
+		$storeService->address = $request->get('address');
+		$storeService->save();
+		return redirect('/view/customer/services')->with('success', 'Request Sent Successfully !');
 	}
 
 	/**
@@ -66,7 +80,8 @@ class ServiceController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id) {
-		//
+		$editSelectedService = Service::where(['service_id' => $id])->first();
+		return view('service.edit', compact('editSelectedService'));
 	}
 
 	/**
@@ -77,7 +92,10 @@ class ServiceController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id) {
-		//
+		$updateService = Service::findOrFail($id);
+		$updateService->service_name = $request->get('service');
+		$updateService->save();
+		return redirect('view/services')->with('success', 'Service Updated Successfully !');
 	}
 
 	/**
@@ -87,6 +105,8 @@ class ServiceController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id) {
-		//
+		$deleteService = Service::findOrFail($id);
+		$deleteService->delete();
+		return redirect('view/services')->with('success', 'Service Deleted Successfully !');
 	}
 }

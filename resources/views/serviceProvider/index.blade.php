@@ -1,4 +1,4 @@
-@section('title', 'Services')
+@section('title', 'Service Provider')
 @include('main')
 @include('components/mainmenu')
 @include('components/breadcrumb')
@@ -7,11 +7,9 @@
 <!-- START: -->
 <section class="card">
     <div class="card-header">
-         <div class="dropdown pull-right">
-           <a href="{{route('createService')}}" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp; &nbsp; Add Service &nbsp; &nbsp;</a>
-       </div>
+
         <span class="cat__core__title">
-            <strong>Services List</strong>
+            <strong>Service Provider List</strong>
         </span>
     </div>
 
@@ -38,6 +36,9 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -45,21 +46,30 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </tfoot>
             <tbody>
                 <?php $i = 1;?>
-			@foreach($fetchAllServices as $services)
+			@foreach($fetchAllServiceProviders as $providers)
             <tr>
                 <td>{{$i++}}</td>
-                <td>{{ $services->service_name }}</td>
-                <td style="width:250px;">
-                    <a href="{{route('editService', $services->service_id)}}" class="btn btn-primary" style="margin-left:40px;"> Edit</a>
-                     {!! Form::open(['method' => 'DELETE','route' => ['deleteService', $services->service_id],'style'=>'display:inline','role'=>'form','onsubmit' => 'return confirm("Do you want to delete this ?")']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                <td>{{ $providers->username }}</td>
+                <td>{{ $providers->email }}</td>
+                <td>{{ $providers->contact_no }}</td>
+                <td>{{ $providers->role === 4 ? 'Requested Service Provider' : 'Service Provider'}}</td>
+                @if($providers->role === 4)
+               <td style="width:250px;">
+                    <a href="{{route('accept', $providers->user_id)}}" class="btn btn-primary" style="margin-left:40px;"> Accept</a>
                 </td>
+                @else
+                <td style="width:250px;">
+                    <a href="{{route('reject', $providers->user_id)}}" class="btn btn-danger" style="margin-left:40px;"> Reject</a>
+                </td>
+                @endif
             </tr>
 			@endforeach
             </tbody>

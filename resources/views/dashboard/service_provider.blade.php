@@ -32,132 +32,49 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
             </div>
         </div>
     </div>
-    <div class="col-xl-8">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="cat__core__widget p-3">
-                    <strong>Service Providers:</strong>
-                    <p class="text-muted">Registered Service Providers:  <strong>{{$getServiceProviderCount}}</strong></p>
-
-                    <strong>Customers:</strong>
-                    <p class="text-muted">Registered customer:<strong>{{$getCustomerCount}}</strong></p>
-
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="cat__core__widget cat__core__widget__3 bg-default">
-                    <div class="carousel slide" id="carousel-1" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <a href="{{route('viewServiceProviders')}}" class="cat__core__widget__3__body text-white">
-                                    <div class="cat__core__widget__3__icon">
-                                        <i class="icmn-accessibility"></i>
-                                    </div>
-                                    <h2><i class="icmn-accessibility"></i> Service Providers</h2>
-                                    <p>View</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cat__core__widget cat__core__widget__3 bg-default">
-                    <div class="carousel slide" id="carousel-4" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <a href="javascript: void(0);" class="cat__core__widget__3__body text-white">
-                                    <div class="cat__core__widget__3__icon">
-                                        <i class="icmn-users"></i>
-                                    </div>
-                                    <h2>
-                                        <i class="icmn-users"></i> Customers
-                                    </h2>
-                                    <p>View
-                                    </p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cat__core__widget cat__core__widget__3 bg-default">
-                    <div class="carousel slide" id="carousel-4" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <a href="{{route('viewServices')}}" class="cat__core__widget__3__body text-white">
-                                    <div class="cat__core__widget__3__icon">
-                                        <i class="icmn-cogs"></i>
-                                    </div>
-                                    <h2>
-                                        <i class="icmn-cogs"></i> Services
-                                    </h2>
-                                    <p>View
-                                    </p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- <div class="row">
-    <div class="col-lg-3">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--success">
-                <span class="cat__core__step__digit">
-                    <i class="icmn-database"></i>
-                </span>
-                <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Databases</span>
-                    <p>Total Products: 61756</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--primary">
-                <span class="cat__core__step__digit">
-                    <i class="icmn-users"></i>
-                </span>
-                <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Users</span>
-                    <p>Total Users: 7658</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="cat__core__widget">
+<div class="row">
+    <div class="col-lg-4">
+        <a href="{{route('showServiceProviderNotification')}}">
+            <div class="cat__core__widget">
             <div class="cat__core__step cat__core__step--danger">
                 <span class="cat__core__step__digit">
                     <i class="icmn-bullhorn"></i>
                 </span>
                 <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Connections</span>
-                    <p>Total Visitors: 5543</p>
+                    <span class="cat__core__step__title">Notifications</span>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+    <div class="col-lg-4">
+        <div class="cat__core__widget">
+            <div class="cat__core__step cat__core__step--primary">
+                <span class="cat__core__step__digit">
+                    <i class="icmn-clipboard"></i>
+                </span>
+                <div class="cat__core__step__desc">
+                    <span class="cat__core__step__title">Track Services</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div class="cat__core__widget">
             <div class="cat__core__step cat__core__step--default">
                 <span class="cat__core__step__digit">
                     <i class="icmn-price-tags"></i>
                 </span>
                 <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Sales</span>
-                    <p>Total Orders: 646</p>
+                    <span class="cat__core__step__title">View FeedBack</span>
                 </div>
             </div>
         </div>
     </div>
-</div> -->
+</div>
+
+</div>
+
 
 <!-- END: page scripts -->
 <!-- START: page scripts -->
