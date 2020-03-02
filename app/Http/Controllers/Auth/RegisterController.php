@@ -56,7 +56,13 @@ class RegisterController extends Controller {
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
 	protected function validator(array $data) {
-		if ($data['role'] === 4) {
+		if ($data['role'] == 4) {
+			if ($data['services'] == "Driver") {
+				return Validator::make($data, [
+					'license_image' => ['required', 'image', 'max:2048'],
+				]);
+			}
+
 			return Validator::make($data, [
 				'name' => ['required', 'string', 'max:255'],
 				'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -66,9 +72,10 @@ class RegisterController extends Controller {
 				'pin' => ['required', 'string', 'max:10'],
 				'contact' => ['required', 'string', 'max:10'],
 				'services' => ['required', 'string', 'max:150'],
-				'profile_image' => ['required', 'string', 'max:255'],
+				'profile_image' => ['required', 'image', 'max:2048'],
 				'description' => ['required', 'string', 'max:255'],
 			]);
+
 		} else {
 			return Validator::make($data, [
 				'name' => ['required', 'string', 'max:255'],
@@ -90,11 +97,17 @@ class RegisterController extends Controller {
 	 */
 	protected function create(array $data) {
 		if ($data['role'] == 4) {
-			if ($data['license_image']) {
-				$image = $data['license_image'];
-				$license_image = time() . '.' . $image->getClientOriginalExtension();
-				Image::make($image)->resize(128, 128)->save(public_path('/upload/profileimage/' . $license_image));
+
+			if ($data['services'] == 'Driver') {
+
+				if ($data['license_image']) {
+					$image = $data['license_image'];
+					$license_image = time() . '.' . $image->getClientOriginalExtension();
+					Image::make($image)->resize(128, 128)->save(public_path('/upload/profileimage/' . $license_image));
+				}
+
 			}
+
 			if ($data['profile_image']) {
 				$image = $data['profile_image'];
 				$profile_image = time() . '.' . $image->getClientOriginalExtension();
@@ -109,9 +122,9 @@ class RegisterController extends Controller {
 				'contact_no' => $data['contact'],
 				'role' => 4,
 				'password' => Hash::make($data['password']),
-				'license_image' => $license_image,
+				'license_image' => $license_image ?? "NULL",
 				'profile' => $profile_image,
-				'service_type' => implode(',', $data['services']),
+				'service_type' => $data['services'],
 				'description' => $data['description'],
 			]);
 		} else {

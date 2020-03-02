@@ -58,15 +58,13 @@
                                        data-validation="[NOTEMPTY]">
                             </div>
                             <div class="form-group">
+                              <label class="form-label">Service</label>
+                                   <select name="services" class="form-control" data-validation="[NOTEMPTY]" id="services" onchange="myFunction()">
+                                     <option value="">Please Select</option>
                                   <?php $__currentLoopData = $fetchAllServices; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <input type="checkbox"
-                                     name="services[]"
-                                     class="service_checkbox"
-                                     value="<?php echo e($service->service_name); ?>"
-                                     onclick='myFunction("<?php echo e($service->service_name); ?>");'>
-                                     <?php echo e($service->service_name); ?>
-
+                                  <option value="<?php echo e($service->service_name); ?>"><?php echo e($service->service_name); ?></option>
                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                   </select>
                             </div>
                             <div class="form-group" id="license">
                                <label class="form-control-label">Upload Your License</label><br><br>
@@ -77,13 +75,13 @@
                                 <label class="form-label">Description</label>
                                        <textarea
                                        class="form-control"
-                                       name="description" placeholder="Description of your work"></textarea>
+                                       name="description" placeholder="Description of your work" data-validation="[NOTEMPTY]"></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Address</label>
                                        <textarea id="address"
                                        class="form-control"
-                                       name="address" placeholder="Address"></textarea>
+                                       name="address" placeholder="Address" data-validation="[NOTEMPTY]"></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">City</label>
@@ -147,7 +145,6 @@
 <!-- START: page scripts -->
 <script>
   $("#license").hide();
-  $("#description").hide();
     $(function() {
 
         // Form Validation
@@ -178,31 +175,14 @@
 
     });
 
-    var limit = 2;
-    $('input.service_checkbox').on('change', function(evt) {
-       if($(this).siblings(':checked').length >= limit) {
-           this.checked = false;
-           alert("You can't select services more than 2");
-       }
-    });
 
-    $("input.service_checkbox").click(function() {
-        if(!$(this).is(":checked")){
-          if($(this).val() === 'Driver'){
-           $("#license").hide();
-          }
-        }
-    });
 
-    function myFunction(data) {
-      if(data){
-        $("#description").show();
+    function myFunction() {
+      var service = $("#services").val();
+      if(service === 'Driver'){
+        $("#license").show();
       }
-      console.log(data);
-          if(data === 'Driver'){
-            $("#license").show();
-          }
-        }
+    }
 
 </script>
 <!-- END: page scripts -->

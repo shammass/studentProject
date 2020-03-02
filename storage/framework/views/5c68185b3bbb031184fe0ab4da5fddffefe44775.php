@@ -33,7 +33,7 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
         </div>
     </div>
     <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-6">
         <a href="<?php echo e(route('viewServicesForCustomer')); ?>">
             <div class="cat__core__widget">
             <div class="cat__core__step cat__core__step--success">
@@ -60,7 +60,7 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
             </div>
         </div>
     </div> -->
-    <div class="col-lg-4">
+<!--     <div class="col-lg-4">
         <div class="cat__core__widget">
             <div class="cat__core__step cat__core__step--danger">
                 <span class="cat__core__step__digit">
@@ -71,18 +71,20 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--default">
-                <span class="cat__core__step__digit">
-                    <i class="icmn-price-tags"></i>
-                </span>
-                <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Feedback</span>
+    </div> -->
+    <div class="col-lg-6">
+        <a href="<?php echo e(route('viewFeedback')); ?>">
+            <div class="cat__core__widget">
+                <div class="cat__core__step cat__core__step--default">
+                    <span class="cat__core__step__digit">
+                        <i class="icmn-price-tags"></i>
+                    </span>
+                    <div class="cat__core__step__desc">
+                        <span class="cat__core__step__title">Feedback</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
     <!-- <div class="col-xl-8">

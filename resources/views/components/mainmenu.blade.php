@@ -1,3 +1,8 @@
+<style>
+    .checked {
+  color: orange;
+}
+</style>
 <body class="cat__config--horizontal cat__menu-left--colorful cat__config--superclean">
 
 <nav class="cat__menu-left">
@@ -7,7 +12,7 @@
         </div>
     </div>
     <div class="cat__menu-left__logo">
-        <a href="{{url('dashboard') }}">
+        <a href="{{url('dashboard') }}" style="color: white;">
             Service Mate
         </a>
     </div>
@@ -33,7 +38,7 @@
                     </li>
                 </ul>
             </li> -->
-			<li class="cat__menu-left__item cat__menu-left__submenu">
+			<!-- <li class="cat__menu-left__item cat__menu-left__submenu">
                 <a href="javascript: void(0);">
                     <span class="cat__menu-left__icon icmn-bubble"></span>
                     Main Menu
@@ -78,7 +83,7 @@
                         </ul>
                     </li>
 				</ul>
-            </li>
+            </li> -->
         </ul>
     </div>
 </nav>

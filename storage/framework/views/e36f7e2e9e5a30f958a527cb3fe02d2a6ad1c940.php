@@ -40,6 +40,7 @@
                 <th>ID</th>
                 <th>Customer Name</th>
                 <th>Customer Contact</th>
+                <th>Service</th>
                 <th>Description</th>
                 <th>City</th>
                 <th>Pincode</th>
@@ -52,6 +53,7 @@
                 <th>ID</th>
                 <th>Customer Name</th>
                 <th>Customer Contact</th>
+                <th>Service</th>
                 <th>Description</th>
                 <th>City</th>
                 <th>Pincode</th>
@@ -64,11 +66,13 @@
 			<?php $__currentLoopData = $fetchRequestedService; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $services): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php 
             $fetchCustomerDetails = App\User::where(['user_id' => $services->customer_id])->first();
+            $fetchServiceName = App\Service::select('service_name')->where(['service_id' => $services->service_id])->first();
              ?>
             <tr>
                 <td><?php echo e($i++); ?></td>
                 <td><?php echo e($fetchCustomerDetails->username); ?></td>
                 <td><?php echo e($fetchCustomerDetails->contact_no); ?></td>
+                <td><?php echo e($fetchServiceName->service_name); ?></td>
                 <td><?php echo e($services->description); ?></td>
                 <td><?php echo e($services->city == NULL ? $fetchCustomerDetails->city : $services->city); ?></td>
                 <td><?php echo e($services->pincode == NULL ? $fetchCustomerDetails->pincode : $services->pincode); ?></td>

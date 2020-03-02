@@ -61,7 +61,8 @@
                                 <label class="form-label">Address</label>
                                        <textarea id="address"
                                        class="form-control"
-                                       name="address" placeholder="Address"></textarea>
+                                       name="address" placeholder="Address"
+                                       data-validation="[NOTEMPTY]"></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">City</label>

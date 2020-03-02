@@ -39,6 +39,7 @@
                 <th>ID</th>
                 <th>Customer Name</th>
                 <th>Customer Contact</th>
+                <th>Service</th>
                 <th>Description</th>
                 <th>City</th>
                 <th>Pincode</th>
@@ -51,6 +52,7 @@
                 <th>ID</th>
                 <th>Customer Name</th>
                 <th>Customer Contact</th>
+                <th>Service</th>
                 <th>Description</th>
                 <th>City</th>
                 <th>Pincode</th>
@@ -63,11 +65,13 @@
 			@foreach($fetchRequestedService as $services)
             @php
             $fetchCustomerDetails = App\User::where(['user_id' => $services->customer_id])->first();
+            $fetchServiceName = App\Service::select('service_name')->where(['service_id' => $services->service_id])->first();
             @endphp
             <tr>
                 <td>{{$i++}}</td>
                 <td>{{ $fetchCustomerDetails->username }}</td>
                 <td>{{ $fetchCustomerDetails->contact_no }}</td>
+                <td>{{ $fetchServiceName->service_name}}</td>
                 <td>{{ $services->description }}</td>
                 <td>{{ $services->city == NULL ? $fetchCustomerDetails->city : $services->city}}</td>
                 <td>{{ $services->pincode == NULL ? $fetchCustomerDetails->pincode : $services->pincode }}</td>
@@ -88,7 +92,7 @@
 <!-- START: page scripts -->
 <script>
     $(function () {
-
+$("#m_section_name").html("Notification");
         // Datatables
         $('#example1').DataTable({
             "lengthMenu": [[10, 25, 50, 100, 200, -1], [10, 25,50, 100, 200, "All"]],

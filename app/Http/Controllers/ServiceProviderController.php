@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomerRequestedService;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class ServiceProviderController extends Controller {
+
+	public function __construct() {
+		$this->middleware('auth');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -19,6 +25,7 @@ class ServiceProviderController extends Controller {
 	public function accept($id) {
 		$acceptServiceProvider = User::findOrFail($id);
 		$acceptServiceProvider->role = 3;
+		$acceptServiceProvider->type = "Trial";
 		$acceptServiceProvider->save();
 		return redirect('view/service_providers')->with('success', 'Accepted Service Provider !');
 	}
@@ -26,8 +33,14 @@ class ServiceProviderController extends Controller {
 	public function reject($id) {
 		$acceptServiceProvider = User::findOrFail($id);
 		$acceptServiceProvider->role = 4;
+		$acceptServiceProvider->type = "";
 		$acceptServiceProvider->save();
 		return redirect('view/service_providers')->with('error', 'Rejected Service Provider !');
+	}
+
+	public function trackMyService() {
+		$fetchAccptedServiceByMe = CustomerRequestedService::where(['accepted_by' => Auth::user()->user_id])->get();
+		return view('serviceProvider.tracking', compact('fetchAccptedServiceByMe'));
 	}
 	/**
 	 * Show the form for creating a new resource.

@@ -65,7 +65,7 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                     <div class="carousel slide" id="carousel-4" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <a href="javascript: void(0);" class="cat__core__widget__3__body text-white">
+                                <a href="{{route('viewCustomers')}}" class="cat__core__widget__3__body text-white">
                                     <div class="cat__core__widget__3__icon">
                                         <i class="icmn-users"></i>
                                     </div>
@@ -99,39 +99,62 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                     </div>
                 </div>
 
+                <div class="cat__core__widget cat__core__widget__3 bg-default">
+                    <div class="carousel slide" id="carousel-4" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <a href="{{route('viewPackages')}}" class="cat__core__widget__3__body text-white">
+                                    <div class="cat__core__widget__3__icon">
+                                        <i class="icmn-stack"></i>
+                                    </div>
+                                    <h2>
+                                        <i class="icmn-stack"></i> Packages
+                                    </h2>
+                                    <p>View
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
-<!-- <div class="row">
+<div class="row">
     <div class="col-lg-3">
-        <div class="cat__core__widget">
+        <a href="{{route('viewRequests')}}">
+            <div class="cat__core__widget">
             <div class="cat__core__step cat__core__step--success">
                 <span class="cat__core__step__digit">
-                    <i class="icmn-database"></i>
+                    <i class="icmn-pushpin"></i>
                 </span>
                 <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Databases</span>
-                    <p>Total Products: 61756</p>
+                    <span class="cat__core__step__title">Requests</span>
+                    <p>Total Requests: {{$requestCount}}</p>
                 </div>
             </div>
         </div>
+        </a>
     </div>
     <div class="col-lg-3">
-        <div class="cat__core__widget">
+        <a href="{{route('viewSubscription')}}">
+            <div class="cat__core__widget">
             <div class="cat__core__step cat__core__step--primary">
                 <span class="cat__core__step__digit">
-                    <i class="icmn-users"></i>
+                    <i class="icmn-play3"></i>
                 </span>
                 <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Users</span>
-                    <p>Total Users: 7658</p>
+                    <span class="cat__core__step__title">Subscription</span>
+                    <p>Subscribed Service Providers: {{$subscribedUsers}}</p>
                 </div>
             </div>
         </div>
+        </a>
     </div>
-    <div class="col-lg-3">
+   <!--  <div class="col-lg-3">
         <div class="cat__core__widget">
             <div class="cat__core__step cat__core__step--danger">
                 <span class="cat__core__step__digit">
@@ -143,21 +166,23 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="col-lg-3">
-        <div class="cat__core__widget">
-            <div class="cat__core__step cat__core__step--default">
+       <a href="{{route('viewFeedbacks')}}">
+            <div class="cat__core__widget">
+            <div class="cat__core__step cat__core__step--danger">
                 <span class="cat__core__step__digit">
                     <i class="icmn-price-tags"></i>
                 </span>
                 <div class="cat__core__step__desc">
-                    <span class="cat__core__step__title">Sales</span>
-                    <p>Total Orders: 646</p>
+                    <span class="cat__core__step__title">Feedbacks</span>
+                    <p>Total Feedback: {{$totalFeedback}}</p>
                 </div>
             </div>
         </div>
+        </a>
     </div>
-</div> -->
+</div>
 
 <!-- END: page scripts -->
 <!-- START: page scripts -->

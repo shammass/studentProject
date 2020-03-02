@@ -28,13 +28,56 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile) && !empty(Auth:
                      <img src="<?php echo asset("/upload/profileimage/$profileimage->profile_image") ?>" alt="">
                     </a>
                    <?php } else {?>
-                         <a class="cat__core__avatar cat__core__avatar--90 cat__core__avatar--border-white" href="javascript:void(0);">
-                            <img src="{!! asset('/upload/profileimage/user_profile.jpg') !!}" alt="Alternative text to the image">
+                         <a class="cat__core__avatar cat__core__avatar--90 cat__core__avatar--border-white" href="/upload/profileimage/{{$fetchServiceProviderDetails->profile}}">
+                            <img src="/upload/profileimage/{{$fetchServiceProviderDetails->profile}}" alt="Alternative text to the image">
                          </a>
                    <?php }?>
                     <br />
                     <h3>Name: {{$fetchServiceProviderDetails->username}}   </h3>
                     <h4>Contact Number: {{$fetchServiceProviderDetails->contact_no}}   </h4>
+
+                    <h4>Rating:
+                @if($rating == 1)
+                    <td>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </td>
+                @elseif($rating == 2)
+                    <td>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </td>
+                @elseif($rating == 3)
+                    <td>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </td>
+                @elseif($rating == 4)
+                <td>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </td>
+                @else
+                <td>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                </td>
+                @endif</h4>
                     <h6></h6><br>
                     <!-- <p>{{ Auth::user()->profile_summary }}</p> -->
                 </div>

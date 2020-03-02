@@ -36,9 +36,9 @@ if (isset(Auth::user()->user_id) && isset(Auth::user()->profile_image) && !empty
                    <?php }?>
 
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="" role="menu">
-                   <!--  <a class="dropdown-item" href="<?php echo e(URL ('profile')); ?>"><i class="dropdown-icon icmn-user"></i> Profile</a>
+                    <a class="dropdown-item" href="<?php echo e(URL ('profile')); ?>"><i class="dropdown-icon icmn-user"></i> Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<?php echo e(URL ('changepassword')); ?>"><i class="dropdown-icon icmn-circle-right"></i> Change Password</a> -->
+                    <a class="dropdown-item" href="<?php echo e(URL ('changepassword')); ?>"><i class="dropdown-icon icmn-circle-right"></i> Change Password</a>
                     <!--<a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-circle-right"></i> Support Ticket</a>-->
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"><i class="dropdown-icon icmn-exit"></i> Logout</a>

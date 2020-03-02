@@ -84,7 +84,7 @@
 <!-- START: page scripts -->
 <script>
     $(function () {
-
+$("#m_section_name").html("Service Provider");
         // Datatables
         $('#example1').DataTable({
             "lengthMenu": [[10, 25, 50, 100, 200, -1], [10, 25,50, 100, 200, "All"]],

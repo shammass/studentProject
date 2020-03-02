@@ -8,6 +8,10 @@ use Auth;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller {
+
+	public function __construct() {
+		$this->middleware('auth');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -41,7 +45,7 @@ class ServiceController extends Controller {
 	}
 
 	public function viewToCustomer() {
-		$fetchAllServices = CustomerRequestedService::all();
+		$fetchAllServices = CustomerRequestedService::where(['customer_id' => Auth::user()->user_id])->get();
 		return view('customer.sendrequests', compact('fetchAllServices'));
 	}
 
@@ -56,9 +60,9 @@ class ServiceController extends Controller {
 		$storeService->customer_id = Auth::user()->user_id;
 		$storeService->accepted_by = 0;
 		$storeService->description = $request->get('description');
-		$storeService->city = $request->get('city');
-		$storeService->pincode = $request->get('pincode');
-		$storeService->address = $request->get('address');
+		$storeService->city = $request->get('city') ?? Auth::user()->city;
+		$storeService->pincode = $request->get('pincode') ?? Auth::user()->pincode;
+		$storeService->address = $request->get('address') ?? Auth::user()->address;
 		$storeService->save();
 		return redirect('/view/customer/services')->with('success', 'Request Sent Successfully !');
 	}
